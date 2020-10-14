@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>Визуализация количества излечившихся COVID19</h2>
+
+<pre><a href="/death" target="_self">Смертей</a></pre><pre><a href="/recovered" target="_self">Выздоровело</a></pre><pre><a href="/" target="_self">Подтверждено</a></pre>
+
+
+<div id="chart">
+   <embed type="image/svg+xml" src= {{ chart|safe }} />
+</div>
+
+{% endblock %}

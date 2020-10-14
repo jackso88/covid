@@ -1,0 +1,7 @@
+Flask
+gunicorn
+pygal
+pygal-maps-world
+requests
+gevent
+

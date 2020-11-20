@@ -6,9 +6,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from pygal.style import Style
 
 
-url = 'https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest?onlyCountries=true'
+url = 'https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/'
+url += 'jhu-edu/latest?onlyCountries=true'
 a = requests.get(url)
 response_dict = a.json()
+
 
 def get_country_code(country_name):
     for code, name in COUNTRIES.items():
@@ -51,7 +53,7 @@ covid_dict = {}
 
 
 def get_dict(x):
- 
+
     global cc
     global data
     global covid_dict
@@ -72,7 +74,9 @@ def get_dict(x):
             covid_dict[code] = conf
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+par = 'this_should_be_configured'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', par)
+
 
 @app.route('/')
 def confirmed() -> 'html':
@@ -83,6 +87,7 @@ def confirmed() -> 'html':
     chart.add('confirmed', covid_dict)
     chart = chart.render_data_uri()
     return render_template('confirmed.html', chart=chart)
+
 
 @app.route('/death')
 def death():
@@ -95,6 +100,7 @@ def death():
     chart = chart.render_data_uri()
     return render_template('deaths.html', chart=chart)
 
+
 @app.route('/recovered')
 def recovered():
     global covid_dict
@@ -105,6 +111,6 @@ def recovered():
     chart.add('Recovered', covid_dict)
     chart = chart.render_data_uri()
     return render_template('recovered.html', chart=chart)
-    
+
 if __name__ == '__main__':
     app.run(debug=True)

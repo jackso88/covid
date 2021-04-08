@@ -10,15 +10,12 @@ url = 'https://covid19-api.org/api/status/'
 a = requests.get(url)
 response_dict = a.json()
 
-
 covid_dict = {}
 
 
 def get_dict(x):
-
     global response_dict
     global covid_dict
-
     for el in response_dict:
         covid_dict[el['country'].lower()] = el[x]
 
@@ -35,7 +32,6 @@ def confirmed() -> 'html':
     chart.title = 'COVID 19'
     chart.add('cases', covid_dict)
     chart = chart.render_data_uri()
-    print(covid_dict)
     return render_template('confirmed.html', chart=chart)
 
 

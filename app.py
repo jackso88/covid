@@ -10,14 +10,13 @@ url = 'https://covid19-api.org/api/status/'
 a = requests.get(url)
 response_dict = a.json()
 
-covid_dict = {}
-
 
 def get_dict(x):
     global response_dict
-    global covid_dict
+    tmp_dict = {}
     for el in response_dict:
-        covid_dict[el['country'].lower()] = el[x]
+        tmp_dict[el['country'].lower()] = el[x]
+    return tmp_dict
 
 app = Flask(__name__)
 par = 'this_should_be_configured'
@@ -26,8 +25,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', par)
 
 @app.route('/')
 def confirmed() -> 'html':
-    global covid_dict
-    get_dict('cases')
+    covid_dict = get_dict('cases')
     chart = pygal.maps.world.World()
     chart.title = 'COVID 19'
     chart.add('cases', covid_dict)
@@ -37,8 +35,7 @@ def confirmed() -> 'html':
 
 @app.route('/death')
 def death():
-    global covid_dict
-    get_dict('deaths')
+    covid_dict = get_dict('deaths')
     custom_style = Style(colors=('#000000', '#000000', '#000000'))
     chart = pygal.maps.world.World(style=custom_style)
     chart.title = 'COVID 19'
@@ -49,8 +46,7 @@ def death():
 
 @app.route('/recovered')
 def recovered():
-    global covid_dict
-    get_dict('recovered')
+    covid_dict = get_dict('recovered')
     custom_style = Style(colors=('#008000', '#008000', '#008000'))
     chart = pygal.maps.world.World(style=custom_style)
     chart.title = 'COVID 19'

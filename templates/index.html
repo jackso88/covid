@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<div class="container">
-	<div id="chart">
+	<div id="chart" style = "padding-top: 50px">
 		<embed type="image/svg+xml" src= {{ chart|safe }} />
 	</div>
-</div>
 {%- endblock %}
 

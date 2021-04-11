@@ -42,7 +42,7 @@ nav.init_app(app)
 def confirmed() -> 'html':
     covid_dict = get_dict('cases')
     chart = pygal.maps.world.World()
-    chart.title = 'COVID 19'
+    chart.title = 'Количество зарегистрированных случаев COVID 19'
     chart.add('cases', covid_dict)
     chart = chart.render_data_uri()
     return render_template('index.html', chart=chart)
@@ -53,7 +53,7 @@ def death():
     covid_dict = get_dict('deaths')
     custom_style = Style(colors=('#000000', '#000000', '#000000'))
     chart = pygal.maps.world.World(style=custom_style)
-    chart.title = 'COVID 19'
+    chart.title = 'Количество умерших от COVID 19'
     chart.add('Deaths', covid_dict)
     chart = chart.render_data_uri()
     return render_template('index.html', chart=chart)
@@ -64,7 +64,7 @@ def recovered():
     covid_dict = get_dict('recovered')
     custom_style = Style(colors=('#008000', '#008000', '#008000'))
     chart = pygal.maps.world.World(style=custom_style)
-    chart.title = 'Визуализация COVID 19'
+    chart.title = 'Количество излечившихся от COVID 19'
     chart.add('Recovered', covid_dict)
     chart = chart.render_data_uri()
     return render_template('index.html', chart=chart)

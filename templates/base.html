@@ -1,12 +1,29 @@
 <!doctype html>
 <html>
-    <head>
-        <title>{{ the_title }}</title>
-        <link rel="stylesheet" href="static/hf.css" />
-    </head>
-    <body>
-        {% block body %}
-
-        {% endblock %}
-    </body>
+    {% extends "bootstrap/base.html" %}
+<head>
+    {% block title %}Covidvisual{% endblock %}
+</head>
+<body>
+    {% block navbar %}
+         <nav class="navbar navbar-fixed-top">
+			 <div class="container">
+              {{nav.top.render()}}
+             </div>
+         </nav>
+    {%- endblock %}
+    	{% block content %}
+        {% block main %}
+        {%- endblock %}
+		{% block footer %}
+			<footer class="bg-light text-center text-lg-start">
+				<div class="container">
+				<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+					© 2021 Andrei Lukin
+				</div>
+				</div>
+			</footer>
+        {%- endblock %}
+	{%- endblock %}
+</body>
 </html>

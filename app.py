@@ -3,6 +3,9 @@ import pygal
 import os
 from pygal.maps.world import COUNTRIES
 from flask import Flask, render_template, request, redirect, url_for
+from flask_bootstrap import Bootstrap
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
 from pygal.style import Style
 
 
@@ -19,8 +22,20 @@ def get_dict(x):
     return tmp_dict
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+nav = Nav()
 par = 'this_should_be_configured'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', par)
+
+
+nav.register_element('top', Navbar(
+        'COVID19',
+        View('Случаев', '.confirmed'),
+        View('Смертей', '.death'),
+        View('Выздоровело', '.recovered'),
+    ))
+
+nav.init_app(app)
 
 
 @app.route('/')
@@ -30,7 +45,7 @@ def confirmed() -> 'html':
     chart.title = 'COVID 19'
     chart.add('cases', covid_dict)
     chart = chart.render_data_uri()
-    return render_template('confirmed.html', chart=chart)
+    return render_template('index.html', chart=chart)
 
 
 @app.route('/death')
@@ -41,7 +56,7 @@ def death():
     chart.title = 'COVID 19'
     chart.add('Deaths', covid_dict)
     chart = chart.render_data_uri()
-    return render_template('deaths.html', chart=chart)
+    return render_template('index.html', chart=chart)
 
 
 @app.route('/recovered')
@@ -49,10 +64,11 @@ def recovered():
     covid_dict = get_dict('recovered')
     custom_style = Style(colors=('#008000', '#008000', '#008000'))
     chart = pygal.maps.world.World(style=custom_style)
-    chart.title = 'COVID 19'
+    chart.title = 'Визуализация COVID 19'
     chart.add('Recovered', covid_dict)
     chart = chart.render_data_uri()
-    return render_template('recovered.html', chart=chart)
+    return render_template('index.html', chart=chart)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

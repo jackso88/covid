@@ -1,4 +1,6 @@
 Flask
+flask-bootstrap
+flask-nav
 gunicorn
 pygal
 pygal-maps-world

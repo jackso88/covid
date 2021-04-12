@@ -1,6 +1,7 @@
 Flask
 flask-bootstrap
 flask-nav
+datetime
 gunicorn
 pygal
 pygal-maps-world

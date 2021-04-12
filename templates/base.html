@@ -1,19 +1,30 @@
 <!doctype html>
+<html>
 {% extends "bootstrap/base.html" %}
 {% block title %}Covidvisual{% endblock %}
-{% block navbar %}
-	<nav class="navbar navbar-fixed-top">
-          {{nav.top.render()}}
-    </nav>
-{%- endblock %}
-{% block content %}
-	{% block main %}
+	<head>
+	</head>
+	<body>
+	{% block navbar %}
+		<nav class="navbar navbar-fixed-top">
+			{{nav.top.render()}}
+		</nav>
 	{%- endblock %}
-	{% block footer %}
-		<footer class="bg-light text-center text-lg-start">
-			<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
-				© 2021 Andrei Lukin
+	{% block content %}
+		{% block main %}
+		{%- endblock %}
+		{% block footer %}
+
+		<footer class="footer">
+			<div class="navbar-fixed-bottom row-fluid"
+			<	div class = "container">
+					<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+						© 2021 Andrei Lukin
+					</div>
+				</div>
 			</div>
 		</footer>
+		{%- endblock %}
 	{%- endblock %}
-{%- endblock %}
+	</body>
+</html>

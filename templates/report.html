@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+	<form class="teamSelection" method="POST" action="/report" style ="padding-top: 80px">
+		<div class = "container">
+			<select class="teamForm" id="teamDropdownSelector" type="text" name="teamDropdown" placeholder="Select A Team">
+				<option disabled selected>Выберите страну</option>
+				{% for el in c_list %}
+					<option id={{ el }} value="{{ el }}">{{ el }}</option>
+				{% endfor %}
+			</select>
+			<input class="btn" type="submit" value="OK">
+		</div>
+    </form>
+    <div class = "container">
+		{% if case_chart %}
+
+    <div id="chart" style = "padding-top: 50px">
+		<embed type="image/svg+xml" src= {{ case_chart|safe }} />
+		<embed type="image/svg+xml" src= {{ rec_chart|safe }} />
+		<embed type="image/svg+xml" src= {{ d_chart|safe }} />
+	</div>
+		{% endif %}
+	</div>
+{%- endblock %}

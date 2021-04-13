@@ -16,8 +16,11 @@
 
     <div id="chart" style = "padding-top: 50px">
 		<embed type="image/svg+xml" src= {{ case_chart|safe }} />
+		<embed type="image/svg+xml" src= {{ case_chart_d|safe }} />
 		<embed type="image/svg+xml" src= {{ rec_chart|safe }} />
+		<embed type="image/svg+xml" src= {{ rec_chart_d|safe }} />
 		<embed type="image/svg+xml" src= {{ d_chart|safe }} />
+		<embed type="image/svg+xml" src= {{ d_chart_d|safe }} />
 	</div>
 		{% endif %}
 	</div>
